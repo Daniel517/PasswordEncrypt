@@ -1,0 +1,15 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+*{
+	-fx-alignment : center;
+	-fx-background-color : #000000;
+}
+.mainLabel {
+	-fx-padding : 20px;
+	-fx-text-fill : #64FF00;
+	-fx-font-size : 18pt;
+}
+.mainButton {
+	-fx-background-color : #64FF00;
+	-fx-font-size : 16pt;
+	
+}
