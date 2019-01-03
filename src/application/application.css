@@ -10,5 +10,16 @@
 .mainButton {
 	-fx-background-color : #64FF00;
 	-fx-font-size : 14pt;
-	
+}
+.encryptInputLabel {
+	-fx-text-fill : #64FF00;
+	-fx-font-size : 16pt;
+}
+.encryptInputButton {
+	-fx-background-color : #64FF00;
+	-fx-font-size : 14pt;
+}
+.encryptedLabel {
+	-fx-font-size : 14pt;
+	-fx-text-fill : #64FF00;
 }
