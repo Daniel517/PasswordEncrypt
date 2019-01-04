@@ -1,5 +1,7 @@
 package application;
 	
+import java.util.Random;
+
 import gui.MainMenu;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -16,6 +18,9 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
+		//launch(args);
+		Random rand = new Random(459);
+		System.out.println(rand.nextInt());
+		System.exit(0);
 	}
 }

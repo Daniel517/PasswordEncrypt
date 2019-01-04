@@ -11,15 +11,15 @@
 	-fx-background-color : #64FF00;
 	-fx-font-size : 14pt;
 }
-.encryptInputLabel {
+.inputLabel {
 	-fx-text-fill : #64FF00;
 	-fx-font-size : 16pt;
 }
-.encryptInputButton {
+.inputButton {
 	-fx-background-color : #64FF00;
 	-fx-font-size : 14pt;
 }
-.encryptedLabel {
+.cipheredLabel {
 	-fx-font-size : 14pt;
 	-fx-text-fill : #64FF00;
 }
