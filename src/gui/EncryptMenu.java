@@ -59,7 +59,7 @@ public class EncryptMenu {
 
 			@Override
 			public void handle(Event event) {
-				addEncryptedText(Encryption.encrypt(inputField.getText(), "43"));
+				addEncryptedText(Encryption.encrypt(inputField.getText(), "abcdAB!"));
 				inputField.clear();
 			}
 			
@@ -79,7 +79,7 @@ public class EncryptMenu {
 			@Override
 			public void handle(KeyEvent event) {
 				if(event.getCode() == KeyCode.ENTER) {
-					addEncryptedText(Encryption.encrypt(inputField.getText(), "43"));
+					addEncryptedText(Encryption.encrypt(inputField.getText(), "abcdAB!"));
 					inputField.clear();
 				}
 			}
