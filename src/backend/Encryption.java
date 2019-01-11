@@ -24,7 +24,7 @@ public class Encryption {
 	 * 
 	 * @param key User given key
 	 */
-	public static void getSeedFromKey(String key) {
+	private static void getSeedFromKey(String key) {
 		char[] keySplit = key.toCharArray();
 		//Adds char values of each char in user given key
 		for(int i = 0; i < keySplit.length; i++) {
@@ -32,12 +32,33 @@ public class Encryption {
 		}
 		rand = new Random(seed);
 	}
-	public static String getEncryptedText(String input) {
+	private static String getEncryptedText(String input) {
 		char[] inSplit = input.toCharArray();
 		StringBuilder encText = new StringBuilder();
 		for(int i = 0; i < inSplit.length; i++) {
-			encText.append((char) (inSplit[i] + rand.nextInt(94)));
+			encText.append(encChar(inSplit[i]));
 		}
 		return encText.toString();
 	}
+	private static char encChar(char inChar) {
+		int intChar = inChar;
+		int currRand = rand.nextInt(95);
+		int enc = intChar + currRand - 32;
+		if(enc < 32) {
+			enc = intChar + currRand + 63;
+		}
+		else if(enc > 126) {
+			enc = inChar + currRand - 127;
+		}
+		return (char)enc;
+	}
 }
+
+
+
+
+
+
+
+
+
