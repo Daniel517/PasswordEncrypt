@@ -1,5 +1,6 @@
 package gui;
 
+import backend.Decryption;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -58,7 +59,7 @@ public class DecryptMenu {
 
 			@Override
 			public void handle(Event event) {
-				addDecryptedText(inputField.getText());
+				addDecryptedText(Decryption.decrypt(inputField.getText(), "abcdAB!"));
 				inputField.clear();
 			}
 			
@@ -78,7 +79,7 @@ public class DecryptMenu {
 			@Override
 			public void handle(KeyEvent event) {
 				if(event.getCode() == KeyCode.ENTER) {
-					addDecryptedText(inputField.getText());
+					addDecryptedText(Decryption.decrypt(inputField.getText(), "abcdAB!"));
 					inputField.clear();
 				}
 			}
