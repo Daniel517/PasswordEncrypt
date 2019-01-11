@@ -41,11 +41,11 @@ public class Encryption {
 		return encText.toString();
 	}
 	private static char encChar(char inChar) {
-		int intChar = inChar;
+		//int intChar = inChar;
 		int currRand = rand.nextInt(95);
-		int enc = intChar + currRand - 32;
+		int enc = inChar + currRand - 32;
 		if(enc < 32) {
-			enc = intChar + currRand + 63;
+			enc = inChar + currRand + 63;
 		}
 		else if(enc > 126) {
 			enc = inChar + currRand - 127;
