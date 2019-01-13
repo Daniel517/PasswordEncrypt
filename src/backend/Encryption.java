@@ -22,6 +22,7 @@ public class Encryption {
 	 * @return encrypted text
 	 */
 	public static String encrypt(String input, String key) {
+		System.out.println(key);
 		getSeedFromKey(key);
 		String encText = getEncryptedText(input);
 		return encText;

@@ -24,6 +24,7 @@ public class EncryptMenu {
 	static GridPane gp = new GridPane();
 	//Counter to keep track of next open vertical slot of gridpane
 	static int counter = 0;
+	static String key;
 	private EncryptMenu() {
 		
 	}
@@ -33,6 +34,8 @@ public class EncryptMenu {
 		primaryStage.setScene(encryptScene);
 		encryptScene.getWindow().centerOnScreen();
 		primaryStage.setTitle("Encryption Menu");
+		key = KeyInputMenu.getKey();
+		System.out.println(key + " 1 2 3");
 		//Calls method to set up I/O bar of menu
 		setUpInputSection(primaryStage);
 		//setUpOutputDisplay();
@@ -79,7 +82,7 @@ public class EncryptMenu {
 			@Override
 			public void handle(KeyEvent event) {
 				if(event.getCode() == KeyCode.ENTER) {
-					addEncryptedText(Encryption.encrypt(inputField.getText(), "abcdAB!"));
+					addEncryptedText(Encryption.encrypt(inputField.getText(), key));
 					inputField.clear();
 				}
 			}
