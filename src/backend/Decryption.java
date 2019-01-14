@@ -1,5 +1,6 @@
 package backend;
 
+import java.io.File;
 import java.util.Random;
 
 public class Decryption {
@@ -25,6 +26,20 @@ public class Decryption {
 		getSeedFromKey(key);
 		String decText = getDecryptedText(input);
 		return decText;
+	}
+	/**
+	 * Decrypts a selected file
+	 * 
+	 * @param fileSelected File to be decrypted
+	 * @param key Key used for decryption
+	 */
+	public static void decryptFile(File fileSelected, String key) {
+		System.out.println(fileSelected);
+		//
+		//
+		//DO THIS
+		//
+		//
 	}
 	/**
 	 * Runs algorithm to get seed from the user given key and creates Random instance with seed

@@ -1,5 +1,7 @@
 package gui;
 
+import java.util.Optional;
+
 import backend.Encryption;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -7,39 +9,78 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class EncryptMenu {
-	//BorderPane to be used as main layout for scene
+	/**
+	 * BorderPane to be used as main layout for scene
+	 */
 	static BorderPane bp = new BorderPane();
-	//Scene for encyption menu
+	/**
+	 * Scene for encyption menu
+	 */
 	static Scene encryptScene = new Scene(bp, 800, 800);
-	//GridPane used to display encrpyted text
+	/**
+	 * GridPane used to display encrpyted text
+	 */
 	static GridPane gp = new GridPane();
-	//Counter to keep track of next open vertical slot of gridpane
+	/**
+	 * Counter to keep track of next open vertical slot of gridpane
+	 */
 	static int counter = 0;
-	static String key;
+	/**
+	 * Key used for encryption
+	 */
+	static String key = "RanDom3892GenEraTed191830Key";
+	/**
+	 * Private constructor
+	 */
 	private EncryptMenu() {
 		
 	}
+	/**
+	 * Sets up the GUI for encryption
+	 * 
+	 * @param primaryStage Primary Stage
+	 */
 	public static void encryptMenu(Stage primaryStage) {
 		//Set up properties for scene
 		encryptScene.getStylesheets().add("application/application.css");
 		primaryStage.setScene(encryptScene);
 		encryptScene.getWindow().centerOnScreen();
 		primaryStage.setTitle("Encryption Menu");
-		key = KeyInputMenu.getKey();
-		System.out.println(key + " 1 2 3");
+		//Calls method to ask user for key
+		getKey();
 		//Calls method to set up I/O bar of menu
 		setUpInputSection(primaryStage);
 		//setUpOutputDisplay();
 	}
+	/**
+	 * Gets key from user to be used for encryption
+	 */
+	private static void getKey() {
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("Key Input Menu");
+		dialog.setHeaderText("Enter key: (Default used if left empty)");
+		dialog.setContentText("Key: ");
+		Optional<String> keyIn = dialog.showAndWait();
+		if(keyIn.isPresent()) {
+			key = keyIn.get();
+		}
+	}
+	/**
+	 * Sets up all objects in the GUI including button, textfields, etc.
+	 * 
+	 * @param primaryStage Primary Stage
+	 */
 	private static void setUpInputSection(Stage primaryStage) {
 		//TextField for user input which will be encrypted
 		TextField inputField = new TextField();
@@ -49,21 +90,38 @@ public class EncryptMenu {
 		//Button to allow the user to encrypt input
 		Button encryptButton = new Button("Encrypt");
 		encryptButton.getStyleClass().add("inputButton");
+		//Button allows user to change encryption key
+		Button changeKeyButton = new Button("Change Key");
+		changeKeyButton.getStyleClass().add("inputButton");
 		//Back button which will allow the user to go back to the main menu
 		Button backButton = new Button("Back");
 		backButton.getStyleClass().add("inputButton");
 		//HBox containing all three elements of the I/O bar
-		HBox inputSection = new HBox(inputField, encryptButton, backButton);
+		HBox inputSection = new HBox(inputField, encryptButton, changeKeyButton, backButton);
 		inputSection.setSpacing(30);
 		//Sets the HBox to the top of the BorderPane
 		bp.setTop(inputSection);
+		//Button allows user to encrypt entire file
+		Button fileButton = new Button("Encrypt File");
+		fileButton.getStyleClass().add("inputButton");
+		HBox fileButtonBox = new HBox(fileButton);
+		bp.setBottom(fileButtonBox);
 		//If encrypt button is pressed, encrypts the input and add it to the display
 		encryptButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event event) {
-				addEncryptedText(Encryption.encrypt(inputField.getText(), "abcdAB!"));
+				addEncryptedText(Encryption.encrypt(inputField.getText(), key));
 				inputField.clear();
+			}
+			
+		});
+		//If pressed allows user to update key
+		changeKeyButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+				getKey();
 			}
 			
 		});
@@ -73,6 +131,14 @@ public class EncryptMenu {
 			@Override
 			public void handle(Event event) {
 				MainMenu.mainMenu(primaryStage);
+			}
+			
+		});
+		fileButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+				fileEncryptOption();
 			}
 			
 		});
@@ -89,6 +155,11 @@ public class EncryptMenu {
 			
 		});
 	}
+	/**
+	 * Adds encrypted text into gridpane which is displyed to the user.
+	 * 
+	 * @param encryptedText Encrypted text to be displayed
+	 */
 	private static void addEncryptedText(String encryptedText) {
 		//Creates a label of the new encrypted input
 		Label encText = new Label(encryptedText);
@@ -100,5 +171,12 @@ public class EncryptMenu {
 		//Adds the gridpane with all ecrypted text to the center 
 		//of the borderpane in order to be displayed to the user
 		bp.setCenter(gp);
+	}
+	/**
+	 * Encrypts an entire file based on the current key
+	 */
+	private static void fileEncryptOption() {
+		FileChooser fc = new FileChooser();
+		Encryption.encryptFile(fc.showOpenDialog(null), key);
 	}
 }

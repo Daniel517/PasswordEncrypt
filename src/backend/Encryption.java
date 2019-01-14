@@ -1,5 +1,6 @@
 package backend;
 
+import java.io.File;
 import java.util.Random;
 
 public class Encryption {
@@ -17,20 +18,33 @@ public class Encryption {
 	/**
 	 * Encrypts input text using custom algorithm
 	 * 
-	 * @param input text to be encrypted
-	 * @param key key for encryption algorithm
-	 * @return encrypted text
+	 * @param input Text to be encrypted
+	 * @param key Key for encryption algorithm
+	 * @return Encrypted text
 	 */
 	public static String encrypt(String input, String key) {
-		System.out.println(key);
 		getSeedFromKey(key);
 		String encText = getEncryptedText(input);
 		return encText;
 	}
 	/**
+	 * Encrypts a selected file
+	 * 
+	 * @param fileSelected File to be encrypted
+	 * @param key Key used for encryption
+	 */
+	public static void encryptFile(File fileSelected, String key) {
+		System.out.println(fileSelected);
+		//
+		//
+		//DO THIS
+		//
+		//
+	}
+	/**
 	 * Runs algorithm to get seed from the user given key and creates Random instance with seed
 	 * 
-	 * @param key user given key
+	 * @param key User given key
 	 */
 	private static void getSeedFromKey(String key) {
 		//Splits input key to array of chars
@@ -46,8 +60,8 @@ public class Encryption {
 	 * Splits input text into char array and sends each character to encryption algorithm. Each 
 	 * encrypted char is appended to a string.
 	 * 
-	 * @param input text to be encrypted
-	 * @return encrypted text
+	 * @param input Text to be encrypted
+	 * @return Encrypted text
 	 */
 	private static String getEncryptedText(String input) {
 		//Splits the input string into array of chars
@@ -62,8 +76,8 @@ public class Encryption {
 	/**
 	 * Encrypts a char using algorithm
 	 * 
-	 * @param inChar char to be encrypted
-	 * @return encrypted char
+	 * @param inChar Char to be encrypted
+	 * @return Encrypted char
 	 */
 	private static char encChar(char inChar) {
 		int currRand = rand.nextInt(95);
