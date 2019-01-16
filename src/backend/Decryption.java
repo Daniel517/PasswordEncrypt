@@ -33,13 +33,28 @@ public class Decryption {
 	 * @param fileSelected File to be decrypted
 	 * @param key Key used for decryption
 	 */
-	public static void decryptFile(File fileSelected, String key) {
-		System.out.println(fileSelected);
-		//
-		//
-		//DO THIS
-		//
-		//
+	public static void decryptFile(File fileSelected, String key, String regex) {
+		getSeedFromKey(key);
+		String[] passLines = FileIO.readFile(fileSelected);
+		String[] details = new String[passLines.length];
+		String[] originalPass = new String[passLines.length];
+		splitLines(passLines, details, originalPass, regex);
+		FileIO.writeFile(fileSelected, details, decryptPasswords(originalPass));
+	}
+	private static void splitLines(String[] passLines, String[] details, String[] passwords, String regex) {
+		String[] splitLine;
+		for(int i = 0; i < passLines.length; i++) {
+			splitLine = passLines[i].split(regex);
+			details[i] = splitLine[0] + regex;
+			passwords[i] = splitLine[1];
+		}
+	}
+	private static String[] decryptPasswords(String[] originalPass) {
+		String[] decryptedPasswords = new String[originalPass.length];
+		for(int i = 0; i < originalPass.length; i++) {
+			decryptedPasswords[i] = getDecryptedText(originalPass[i]);
+		}
+		return decryptedPasswords;
 	}
 	/**
 	 * Runs algorithm to get seed from the user given key and creates Random instance with seed

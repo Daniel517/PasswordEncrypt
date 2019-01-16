@@ -177,6 +177,6 @@ public class EncryptMenu {
 	 */
 	private static void fileEncryptOption() {
 		FileChooser fc = new FileChooser();
-		Encryption.encryptFile(fc.showOpenDialog(null), key);
+		Encryption.encryptFile(fc.showOpenDialog(null), key, "Æ ");
 	}
 }

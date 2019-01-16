@@ -71,7 +71,7 @@ public class DecryptMenu {
 		Button backButton = new Button("Back");
 		backButton.getStyleClass().add("inputButton");
 		//HBox containing all three elements of the I/O bar
-		HBox inputSection = new HBox(inputField, decryptButton, backButton);
+		HBox inputSection = new HBox(inputField, decryptButton, changeKeyButton, backButton);
 		inputSection.setSpacing(30);
 		//Sets the HBox to the top of the BorderPane
 		bp.setTop(inputSection);
@@ -146,6 +146,6 @@ public class DecryptMenu {
 	 */
 	private static void fileDecryptOption() {
 		FileChooser fc = new FileChooser();
-		Decryption.decryptFile(fc.showOpenDialog(null), key);
+		Decryption.decryptFile(fc.showOpenDialog(null), key, "Æ ");
 	}
 }

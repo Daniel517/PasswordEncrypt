@@ -17,5 +17,10 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+//		String copy = "HEÆ LLO";
+//		String[] pass = copy.split("Æ ");
+//		System.out.println(pass[0]);
+//		System.out.println(pass[1]);
+//		System.exit(0);
 	}
 }
