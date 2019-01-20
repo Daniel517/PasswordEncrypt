@@ -18,7 +18,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+/**
+ * GUI for encryption 
+ * 
+ * @author danielramirez
+ *
+ */
 public class EncryptMenu {
 	/**
 	 * BorderPane to be used as main layout for scene
@@ -37,7 +42,7 @@ public class EncryptMenu {
 	 */
 	static int counter = 0;
 	/**
-	 * Key used for encryption
+	 * Key used for encryption, default set
 	 */
 	static String key = "RanDom3892GenEraTed191830Key";
 	/**
@@ -67,12 +72,12 @@ public class EncryptMenu {
 	 * Gets key from user to be used for encryption
 	 */
 	private static void getKey() {
-		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("Key Input Menu");
-		dialog.setHeaderText("Enter key: (Default used if left empty)");
-		dialog.setContentText("Key: ");
-		Optional<String> keyIn = dialog.showAndWait();
-		if(keyIn.isPresent()) {
+		TextInputDialog keyDialog = new TextInputDialog();
+		keyDialog.setTitle("Key Input Menu");
+		keyDialog.setHeaderText("Enter key: (Default used if left empty)");
+		keyDialog.setContentText("Key: ");
+		Optional<String> keyIn = keyDialog.showAndWait();
+		if(keyIn.isPresent() && keyIn.get() != "") {
 			key = keyIn.get();
 		}
 	}
@@ -82,6 +87,7 @@ public class EncryptMenu {
 	 * @param primaryStage Primary Stage
 	 */
 	private static void setUpInputSection(Stage primaryStage) {
+		System.out.println(key);
 		//TextField for user input which will be encrypted
 		TextField inputField = new TextField();
 		inputField.setPromptText("Enter password to encrypt...");
@@ -177,6 +183,21 @@ public class EncryptMenu {
 	 */
 	private static void fileEncryptOption() {
 		FileChooser fc = new FileChooser();
-		Encryption.encryptFile(fc.showOpenDialog(null), key, "Æ ");
+		String regex = getRegex() + " ";
+		Encryption.encryptFile(fc.showOpenDialog(null), key, regex);
+	}
+	private static String getRegex() {
+		TextInputDialog regexDialog = new TextInputDialog();
+		regexDialog.setTitle("Regex Input Menu");
+		regexDialog.setHeaderText("Enter splitting special character: (Anything before splitting character will not encrypted)"
+				+ "\nShould be of ascii value higher than 127 and a space should be placed after special character:");
+		regexDialog.setContentText("Character: ");
+		Optional<String> regexIn = regexDialog.showAndWait();
+		if(regexIn.isPresent()) {
+			return regexIn.get();
+		}
+		else {
+			return "";
+		}
 	}
 }

@@ -18,17 +18,32 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+/**
+ * GUI for decryption
+ * 
+ * @author danielramirez
+ *
+ */
 public class DecryptMenu {
-	//BorderPane to be used as main layout for scene
+	/**
+	 * BorderPane to be used as main layout for scene
+	 */
 	static BorderPane bp = new BorderPane();
-	//Scene for decryption menu
+	/**
+	 * Scene for decryption menu
+	 */
 	static Scene decryptScene = new Scene(bp, 800, 800);
-	//GridPane used to display decrypted text
+	/**
+	 * GridPane used to display decrypted text
+	 */
 	static GridPane gp = new GridPane();
-	//Counter to keep track of next open vertical slot of gridpane
+	/**
+	 * Counter to keep track of next open vertical slot of gridpane
+	 */
 	static int counter = 0;
-	//Key
+	/**
+	 * Key for decryption, default set
+	 */
 	static String key = "RanDom3892GenEraTed191830Key";
 	private DecryptMenu() {
 		
@@ -146,6 +161,21 @@ public class DecryptMenu {
 	 */
 	private static void fileDecryptOption() {
 		FileChooser fc = new FileChooser();
-		Decryption.decryptFile(fc.showOpenDialog(null), key, "Æ ");
+		String regex = getRegex() + " ";
+		Decryption.decryptFile(fc.showOpenDialog(null), key, regex);
+	}
+	private static String getRegex() {
+		TextInputDialog regexDialog = new TextInputDialog();
+		regexDialog.setTitle("Regex Input Menu");
+		regexDialog.setHeaderText("Enter splitting special character: (Anything before splitting character will not encrypted)"
+				+ "\nShould be of ascii value higher than 127 and a space should be placed after special character:");
+		regexDialog.setContentText("Character: ");
+		Optional<String> regexIn = regexDialog.showAndWait();
+		if(regexIn.isPresent()) {
+			return regexIn.get();
+		}
+		else {
+			return " ";
+		}
 	}
 }

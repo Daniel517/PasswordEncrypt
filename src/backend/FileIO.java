@@ -28,7 +28,6 @@ public class FileIO {
 		String[] passwords = new String[passLines.size()];
 		for(int i = 0; i < passLines.size(); i++) {
 			passwords[i] = passLines.get(i);
-			System.out.println(passLines.get(i));
 		}
 		return passwords;
 	}
@@ -36,7 +35,6 @@ public class FileIO {
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(selectedFile));
 			for(int i = 0; i < passwords.length; i++) {
-				System.out.println(details[i] + passwords[i]);
 				bw.write(details[i] + passwords[i] + "\n");
 			}
 			bw.close();
