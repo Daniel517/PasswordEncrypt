@@ -9,10 +9,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class FileIO {
+	
 	static int numberOfPass;
+	
 	private FileIO() {
 		
 	}
+	
+	/**
+	 * Reads a file and return an array of strings of all lines in text file
+	 * 
+	 * @param selectedFile File being used
+	 * @return Array of strings of every line in file
+	 */
 	public static String[] readFile(File selectedFile) {
 		String currentLine;
 		ArrayList<String> passLines = new ArrayList<String>();
@@ -31,6 +40,14 @@ public class FileIO {
 		}
 		return passwords;
 	}
+	
+	/**
+	 * Writes to a selected file and concatenates a String from password to details
+	 * 
+	 * @param selectedFile File path to be written to
+	 * @param details Array of strings of first part of line
+	 * @param passwords Array of Strings of each password
+	 */
 	public static void writeFile(File selectedFile, String[] details, String[] passwords) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(selectedFile));
